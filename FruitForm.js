@@ -6,6 +6,11 @@ const options = ['apple', 'banana', 'carrot'];
 
 const FruitForm = ({submitFruit}) => {
   const {control, handleSubmit} = useForm();
+
+  // DO THIS! control what you pass to submitFruit as submitFruit is the function you are testing
+  const onSubmit = (data) => {
+    submitFruit(data);
+  };
   return (
     <View>
       <View style={{height: 50}} />
@@ -28,7 +33,9 @@ const FruitForm = ({submitFruit}) => {
         name="favourite_fruit"
         rules={{required: true}}
       />
-      <Button title="Submit" onPress={handleSubmit(submitFruit)} />
+      {/* DO NOT DO THIS!! You will not know what arguments handleSubmit is passing to submitFruit */}
+      {/* <Button title="Submit" onPress={handleSubmit(submitFruit)} /> */}
+      <Button title="Submit" onPress={handleSubmit(onSubmit)} />
     </View>
   );
 };
